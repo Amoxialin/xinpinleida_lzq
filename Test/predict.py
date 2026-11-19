@@ -37,6 +37,7 @@ from model.classification.transformer import Transformer
 from model.classification.dpcnn import DPCNN
 from model.classification.attentive_convolution import AttentiveConvNet
 from model.classification.region_embedding import RegionEmbedding
+from model.classification.hmcn import HMCN
 from model.model_util import get_optimizer, get_hierar_relations
 
 ClassificationDataset, ClassificationCollator, FastTextCollator,FastText, TextCNN, TextRNN, TextRCNN, DRNN, TextVDCNN, Transformer, DPCNN, AttentiveConvNet, RegionEmbedding
@@ -77,6 +78,9 @@ class Predictor(object):
             batch_texts = [self.dataset._get_vocab_id_list(json.loads(text)) for text in texts]
             batch_texts = self.collate_fn(batch_texts)
             logits = self.model(batch_texts)
+            if isinstance(logits, tuple):
+                # HMCN 返回 (global_logits, local_logits, 0.5*global+0.5*local)，推理取融合输出
+                logits = logits[-1]
             if self.config.task_info.label_type != ClassificationType.MULTI_LABEL:
                 probs = torch.softmax(logits, dim=1)
             else:

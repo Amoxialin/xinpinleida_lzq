@@ -35,11 +35,11 @@ class SumAttention(torch.nn.Module):
 
     def forward(self, inputs):
         if inputs.size(1) == 1:
-            return self.dropout(inputs.squeeze())
+            return self.dropout(inputs.squeeze(1))
         u = torch.tanh(self.attention_matrix(inputs))
         v = self.attention_vector(u)
-        alpha = torch.nn.functional.softmax(v, 1).squeeze().unsqueeze(1)
-        return self.dropout(torch.matmul(alpha, inputs).squeeze())
+        alpha = torch.nn.functional.softmax(v, 1).squeeze(2).unsqueeze(1)
+        return self.dropout(torch.matmul(alpha, inputs).squeeze(1))
 
 
 class AdditiveAttention(torch.nn.Module):
