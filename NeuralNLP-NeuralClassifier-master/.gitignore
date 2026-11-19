@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 框架评估器自动生成的调试 dump（每次 eval 重写，约 37MB）
+probs.txt
+
+# 推理/评测输出，可用 test_val_yft.py 重新生成
+test-val_predicted.csv
+test_val_per_label.csv
+
+# 每次评测运行的产物目录（logs/<模型>_<时间>/），历史 5 个 .log 仍保留跟踪
+logs/*/
