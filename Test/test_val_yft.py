@@ -264,8 +264,8 @@ def compute_metrics(golds, preds, vocab_size):
 # ---------------------------------------------------------------- 主流程
 
 def main():
-    ap = argparse.ArgumentParser(description=u"test2.csv 模型评测")
-    ap.add_argument("--csv", default="data/test2.csv", help=u"输入 CSV")
+    ap = argparse.ArgumentParser(description=u"real_1000.csv 模型评测")
+    ap.add_argument("--csv", default="data/real_1000.csv", help=u"输入 CSV")
     ap.add_argument("--conf", default="conf/train.yft.json")
     ap.add_argument("--model", default=None, help=u"覆盖 conf.eval.model_dir")
     ap.add_argument("--id-col", default=u"序号")
