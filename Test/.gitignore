@@ -14,3 +14,10 @@ test_val_per_label.csv
 
 # 每次评测运行的产物目录（logs/<模型>_<时间>/），历史 5 个 .log 仍保留跟踪
 logs/*/
+
+# 11 个对比模型的权重：共 12GB，且 TextVDCNN 单文件 171MB 超过 GitHub 100MB 硬限制。
+# 用 conf/bench/train.<模型>.json + train.py 可重新训练得到
+checkpoint_dir_bench/
+
+# 后处理调参缓存，可由 test_val_yft_v3.py 重新生成
+.postproc_cache/
